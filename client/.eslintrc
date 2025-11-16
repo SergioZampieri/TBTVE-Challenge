@@ -6,17 +6,17 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "eslint-config-prettier",
+    "prettier"
   ],
-  "ignorePatterns": ["dist", ".eslintrc.cjs",".jest.config.js" ],
+  "ignorePatterns": ["dist", "build"],
   "parserOptions": { "ecmaVersion": "latest", "sourceType": "module" },
-  "settings": { "react": { "version": "18.2" } },
-  "plugins": ["react-refresh","import"],
+  "settings": { "react": { "version": "detect" } },
+  "plugins": ["react-refresh", "import"],
   "rules": {
     "react-refresh/only-export-components": [
       "warn",
-      { "allowConstantExport": true },
+      { "allowConstantExport": true }
     ],
-    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/newline-after-import": ["error", { "count": 1 }]
   }
 }
