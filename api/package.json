@@ -1,0 +1,23 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Sergio Zampieri",
+  "engines": {
+    "node": "^14"
+  },
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "standard && mocha"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "mocha": "^9.2.2",
+    "standard": "^17.1.2"
+  }
+}
