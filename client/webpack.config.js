@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+//TODO: process.env.NODE_ENV solo funciona en node 20+, instalar dot.env o dejar como chore la implementacion del loader variable segun environment
+
 module.exports = {
     entry: "./src/index.js",
     output: {
