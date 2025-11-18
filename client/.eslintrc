@@ -1,22 +1,26 @@
 {
   "root": true,
-  "env": { "browser": true, "es2020": true, "jest": true },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest"
+  },
+  "env": { "browser": true, "es6": true, "jest": true, "node": true },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
     "eslint-config-prettier"
   ],
-  "ignorePatterns": ["dist", "build", "webpack.config.js"],
-  "parserOptions": { "ecmaVersion": "latest", "sourceType": "module" },
-  "settings": { "react": { "version": "detect" } },
-  "plugins": ["react-refresh", "import"],
+  "ignorePatterns": ["dist", "build", "node_modules"],
+  "settings": {
+    "react": { "version": "detect" }
+  },
+  "plugins": ["react", "react-hooks", "import", "prettier"],
   "rules": {
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ],
     "import/newline-after-import": ["error", { "count": 1 }]
   }
 }
