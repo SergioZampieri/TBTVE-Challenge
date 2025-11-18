@@ -1,21 +1,21 @@
-const axios = require("axios")
-const parseCSV = require("../utils/csvParser")
+const axios = require('axios')
+const parseCSV = require('../utils/csvParser')
 
 const axiosInstance = axios.create({
-  baseURL: "https://echo-serv.tbxnet.com/v1/secret",
+  baseURL: 'https://echo-serv.tbxnet.com/v1/secret',
   timeout: 4000,
   headers: {
-    Accept: "application/json",
-    Authorization: "Bearer aSuperSecretKey"
+    Accept: 'application/json',
+    Authorization: 'Bearer aSuperSecretKey'
   }
 })
 
 const getFileNames = async () => {
   try {
-    const resp = await axiosInstance.get("/files")
+    const resp = await axiosInstance.get('/files')
     return resp.data.files || []
   } catch (err) {
-    console.error("Error fetching file:", err.message)
+    console.error('Error fetching file:', err.message)
     throw err
   }
 }

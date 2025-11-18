@@ -1,5 +1,5 @@
-function notFound(err, req, res, next) {
-  res.status(404).send(`Error: Route does not exist, ${err}`)
+function notFound (req, res, next) {
+  res.status(404).json({ error: 'Route does not exist' })
 }
 
 module.exports = notFound

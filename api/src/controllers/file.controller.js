@@ -1,18 +1,18 @@
-const { getFileNames, getFileContent } = require("../services/file.service")
-const partialMatch = require("../utils/stringPartialMatcher")
+const { getFileNames, getFileContent } = require('../services/file.service')
+const partialMatch = require('../utils/stringPartialMatcher')
 
-async function getFileNamesHelper() {
+async function getFileNamesHelper () {
   const filenames = await getFileNames()
 
   if (!filenames || filenames.length === 0) {
-    const err = new Error("Error: Files are not available")
+    const err = new Error('Error: Files are not available')
     err.status = 404
     throw err
   }
   return filenames
 }
 
-async function getList(res, next) {
+async function getList (req, res, next) {
   try {
     const filenames = await getFileNamesHelper()
     return res.status(200).json(filenames)
@@ -21,9 +21,9 @@ async function getList(res, next) {
   }
 }
 
-async function getFormattedData(req, res, next) {
-  //const fileToSearch = req.query.fileName || null
-  const fileToSearch = "2.csv"
+async function getFormattedData (req, res, next) {
+  const fileToSearch = req.query.fileName || null
+
   try {
     const filenames = await getFileNamesHelper()
     const matchedFiles = fileToSearch ? partialMatch(filenames, fileToSearch) : filenames
@@ -34,7 +34,6 @@ async function getFormattedData(req, res, next) {
       const content = await getFileContent(filename)
       if (content?.lines?.length) formattedData.push(content)
     }
-
     return res.status(200).json(formattedData)
   } catch (err) {
     next(err)

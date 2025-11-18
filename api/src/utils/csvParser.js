@@ -1,12 +1,12 @@
-function parseCSV(content, filename) {
-  const rows = content.split("\n").slice(1)
+function parseCSV (content, filename) {
+  const rows = content.split('\n').slice(1)
   const validLines = []
 
   rows.forEach((row) => {
-    const [file, text, number, hex] = row.split(",")
+    const [file, text, number, hex] = row.split(',')
 
-    if (!file || file === "") return
-    if (!text || text === "") return
+    if (!file || file === '') return
+    if (!text || text === '') return
     if (!number || isNaN(number)) return
     if (!hex || !/^[a-fA-F0-9]{32}$/.test(hex)) return
 
