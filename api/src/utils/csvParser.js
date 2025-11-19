@@ -16,7 +16,7 @@ function parseCSV (content, filename) {
     if (!number || isNaN(number)) return
     if (!hex || !/^[a-fA-F0-9]{32}$/.test(hex)) return
 
-    // se completa el arreglo de lineas validas y se castea el string a number
+    // se castea el string a number y se completa el arreglo de lineas validas
     validLines.push({
       text,
       number: Number(number),
