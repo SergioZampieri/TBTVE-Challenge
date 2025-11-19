@@ -1,9 +1,9 @@
-const { getFilenames, getFileContent } = require('../services/file.service')
+const fileService = require('../services/file.service')
 const partialMatch = require('../utils/stringPartialMatcher')
 
 // helper para modularizar mejor el codigo
 async function getValidFilenames () {
-  const filenames = await getFilenames()
+  const filenames = await fileService.getFilenames()
 
   if (!filenames || filenames.length === 0) {
     return []
@@ -29,7 +29,7 @@ async function getFormattedData (req, res, next) {
     const matchedFiles = fileToSearch ? partialMatch(filenames, fileToSearch) : filenames
 
     // paraleliza las consultas de contenido y evita secuencializad
-    const contentPromises = matchedFiles.map(filename => getFileContent(filename))
+    const contentPromises = matchedFiles.map(filename => fileService.getFileContent(filename))
     const contents = await Promise.all(contentPromises)
 
     // separa los archivos con errores y los que van a ser enviados al frontend

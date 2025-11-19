@@ -1,0 +1,10 @@
+.git
+.gitignore
+.vscode
+README.md
+CLAUDE.md
+node_modules
+*/node_modules
+*/build
+*/coverage
+*/.eslintrc

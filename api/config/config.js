@@ -5,9 +5,9 @@ module.exports = {
     host: process.env.HOST || 'localhost'
   },
   externalApi: {
-    baseURL: process.env.EXT_API || 'https://echo-serv.tbxnet.com/v1/secret',
+    baseURL: 'https://echo-serv.tbxnet.com/v1/secret',
     timeout: 4000, // 4 segs para preveer que la consulta se cuelgue.
-    auth: process.env.EXT_API_KEY || 'Bearer aSuperSecretKey'
+    auth: 'Bearer aSuperSecretKey'
   },
   cache: {
     ttl: 60000, // 1 min de lifespan para reservar la data sin errores

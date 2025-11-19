@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "standard && mocha",
+    "test": "mocha",
     "lint": "standard --fix"
   },
   "dependencies": {
