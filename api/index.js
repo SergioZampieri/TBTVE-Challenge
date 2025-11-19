@@ -1,8 +1,8 @@
 const http = require('http')
 const app = require('./src/app')
-const config = require ('./config/config')
+const config = require('./config/config')
 
-const port = config.server.port 
+const port = config.server.port
 const hostname = config.server.host
 
 const server = http.createServer(app)

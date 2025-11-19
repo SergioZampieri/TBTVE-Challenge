@@ -1,12 +1,10 @@
 function parseCSV (content, filename) {
-  
   // se separa el contenido y se descarta la primera linea
   const rows = content.split('\n').slice(1)
 
   const validLines = []
 
   rows.forEach((row) => {
-    
     // se separa por comas y se descarta el espacio vacio
     const fields = row.split(',').map(field => field.trim())
 

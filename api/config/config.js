@@ -1,8 +1,8 @@
 // queda pendiente implementar dot-env u otra libreria para usar un .env y no dejar expuesta la autorizacion. Solo por el pedido explicito de la consigna no se uso un archivo con variables de entorno.
 module.exports = {
-  server:{
+  server: {
     port: process.env.PORT || 3000,
-    host: process.env.HOST ||"localhost"
+    host: process.env.HOST || 'localhost'
   },
   externalApi: {
     baseURL: process.env.EXT_API || 'https://echo-serv.tbxnet.com/v1/secret',

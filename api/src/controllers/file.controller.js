@@ -24,10 +24,10 @@ async function getFormattedData (req, res, next) {
   const fileToSearch = req.query.fileName || null
 
   try {
-     // consulta los nombres de los archivos y aplica los filtros si hubo queryparams desde el frontend
+    // consulta los nombres de los archivos y aplica los filtros si hubo queryparams desde el frontend
     const filenames = await getValidFilenames()
     const matchedFiles = fileToSearch ? partialMatch(filenames, fileToSearch) : filenames
-    
+
     // paraleliza las consultas de contenido y evita secuencializad
     const contentPromises = matchedFiles.map(filename => getFileContent(filename))
     const contents = await Promise.all(contentPromises)
@@ -44,7 +44,7 @@ async function getFormattedData (req, res, next) {
       }
     })
 
-    // se visibilizan los archivos con errores 
+    // se visibilizan los archivos con errores
     if (failedFiles.length > 0) {
       console.warn(`Failed to fetch ${failedFiles.length} file(s):`, failedFiles)
     }
