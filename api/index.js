@@ -1,8 +1,9 @@
 const http = require('http')
 const app = require('./src/app')
+const config = require ('./config/config')
 
-const port = process.env.PORT || 3000
-const hostname = process.env.HOSTNAME || 'localhost'
+const port = config.server.port 
+const hostname = config.server.host
 
 const server = http.createServer(app)
 

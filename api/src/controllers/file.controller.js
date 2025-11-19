@@ -1,20 +1,19 @@
-const { getFileNames, getFileContent } = require('../services/file.service')
+const { getFilenames, getFileContent } = require('../services/file.service')
 const partialMatch = require('../utils/stringPartialMatcher')
 
-async function getFileNamesHelper () {
-  const filenames = await getFileNames()
+// helper para modularizar mejor el codigo
+async function getValidFilenames () {
+  const filenames = await getFilenames()
 
   if (!filenames || filenames.length === 0) {
-    const err = new Error('Error: Files are not available')
-    err.status = 404
-    throw err
+    return []
   }
   return filenames
 }
 
 async function getList (req, res, next) {
   try {
-    const filenames = await getFileNamesHelper()
+    const filenames = await getValidFilenames()
     return res.status(200).json(filenames)
   } catch (err) {
     next(err)
@@ -25,16 +24,32 @@ async function getFormattedData (req, res, next) {
   const fileToSearch = req.query.fileName || null
 
   try {
-    const filenames = await getFileNamesHelper()
+     // consulta los nombres de los archivos y aplica los filtros si hubo queryparams desde el frontend
+    const filenames = await getValidFilenames()
     const matchedFiles = fileToSearch ? partialMatch(filenames, fileToSearch) : filenames
+    
+    // paraleliza las consultas de contenido y evita secuencializad
+    const contentPromises = matchedFiles.map(filename => getFileContent(filename))
+    const contents = await Promise.all(contentPromises)
 
-    const formattedData = []
+    // separa los archivos con errores y los que van a ser enviados al frontend
+    const successfulFiles = []
+    const failedFiles = []
 
-    for (const filename of matchedFiles) {
-      const content = await getFileContent(filename)
-      if (content?.lines?.length) formattedData.push(content)
+    contents.forEach(content => {
+      if (content?.error) {
+        failedFiles.push({ file: content.file, error: content.error })
+      } else if (content?.lines?.length) {
+        successfulFiles.push(content)
+      }
+    })
+
+    // se visibilizan los archivos con errores 
+    if (failedFiles.length > 0) {
+      console.warn(`Failed to fetch ${failedFiles.length} file(s):`, failedFiles)
     }
-    return res.status(200).json(formattedData)
+
+    return res.status(200).json(successfulFiles)
   } catch (err) {
     next(err)
   }
