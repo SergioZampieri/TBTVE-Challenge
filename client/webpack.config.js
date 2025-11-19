@@ -1,17 +1,20 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { presets } = require("./babel.config.js");
-const config = require("./config/config.js");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { presets } = require('./babel.config.js')
+const config = require('./config/config.js')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "build")
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'build')
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
   devServer: {
-    static: "./build",
+    static: './build',
     hot: true
   },
   watchOptions: {
@@ -19,7 +22,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "index.html")
+      template: path.join(__dirname, 'public', 'index.html'),
+      title: config.htmlMetadata.title,
+      favicon: config.htmlMetadata.icon
     }),
     new MiniCssExtractPlugin()
   ],
@@ -29,7 +34,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets
           }
@@ -38,16 +43,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          config.env.mode === "production"
+          config.env.mode === 'production'
             ? MiniCssExtractPlugin.loader
-            : "style-loader",
-          "css-loader"
+            : 'style-loader',
+          'css-loader'
         ]
       },
       {
         test: /\.(png|jpe?g|svg)$/i,
-        type: "asset/resource"
+        type: 'asset/resource'
       }
     ]
   }
-};
+}

@@ -4,7 +4,8 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "env": { "browser": true, "es6": true, "jest": true, "node": true },
   "extends": [
@@ -19,8 +20,9 @@
   "settings": {
     "react": { "version": "detect" }
   },
-  "plugins": ["react", "react-hooks", "import", "prettier"],
+  "plugins": ["react", "react-hooks", "import"],
   "rules": {
-    "import/newline-after-import": ["error", { "count": 1 }]
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "no-unused-vars": "off"
   }
 }
