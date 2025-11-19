@@ -229,6 +229,6 @@ El frontend utiliza una arquitectura React moderna:
 
 ## Capturas de Pantalla
 
-<!-- Add screenshot here -->
+![app-screenshot](https://i.ibb.co/LDT7bt8f/Captura1.png)
 
 ---
